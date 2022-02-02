@@ -3,7 +3,7 @@ import React from "react";
 import PropAccordion from "./PropAccordion";
 import { Box } from "@mui/material";
 
-function Jogo() {
+function JogoNBA() {
   let location = useLocation();
   let { jogo } = location.state;
   return (
@@ -15,4 +15,4 @@ function Jogo() {
   );
 }
 
-export default Jogo;
+export default JogoNBA;

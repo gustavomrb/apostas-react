@@ -1,4 +1,4 @@
-import { Box, Link } from "@mui/material";
+import { Box, Link, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -7,42 +7,34 @@ function geraJogos(jogos) {
     <Link
       sx={{
         display: "flex",
-        alignItems: "center",
+        justifyContent: "center",
         textDecoration: "none",
         color: "#000000",
+        fontWeight: "bold",
+        width: "70%",
+        fontSize: "15px",
       }}
       component={RouterLink}
-      to="/jogo"
-      state={{ jogo }}
+      to={"/futebol/jogo/" + jogo.id}
       key={i}
     >
-      <Box component="span" sx={{ fontSize: "30px" }}>
-        {jogo.horario}
+      <Box sx={{ width: "70%" }}>
+        <Paper sx={{ padding: "15px 0", display: "flex", justifyContent: "space-around" }}>
+          <Box component="span">{jogo.horario}</Box>
+          <Box component="span">{jogo.casa.nome}</Box>
+          <Box component="span">X</Box>
+          <Box component="span">{jogo.fora.nome}</Box>
+        </Paper>
       </Box>
-      <Box
-        component="img"
-        alt={jogo.times[0].nome}
-        src={`/images/${jogo.times[0].nomeCurto.toLowerCase()}.png`}
-        sx={{ maxWidth: "150px" }}
-      />
-      <Box component="span" sx={{ fontSize: "30px" }}>
-        @
-      </Box>
-      <Box
-        component="img"
-        alt={jogo.times[1].nome}
-        src={`/images/${jogo.times[1].nomeCurto.toLowerCase()}.png`}
-        sx={{ maxWidth: "150px" }}
-      />
     </Link>
   ));
 }
 
-function JogosNBA() {
+function JogosFutebol() {
   const [jogos, setJogos] = useState([]);
   useEffect(() => {
-    fetch("localhost:3001/futebol/jogos")
-      .then((response) => response.json)
+    fetch("http://localhost:3001/futebol/jogos")
+      .then((response) => response.json())
       .then((data) => setJogos(data));
   }, []);
 
@@ -53,6 +45,7 @@ function JogosNBA() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        fontSize: "13px",
       }}
     >
       <React.Fragment>{geraJogos(jogos)}</React.Fragment>
@@ -60,4 +53,4 @@ function JogosNBA() {
   );
 }
 
-export default JogosNBA;
+export default JogosFutebol;

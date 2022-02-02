@@ -5,7 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JogosNBA from "./JogosNBA";
-import Jogo from "./Jogo";
+import JogoNBA from "./JogoNBA";
+import JogosFutebol from "./JogosFutebol";
+import JogoFutebol from "./JogoFutebol";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +15,9 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="/jogos" element={<JogosNBA />} />
-          <Route path="/jogo" element={<Jogo />} />
+          <Route path="/jogo" element={<JogoNBA />} />
+          <Route path="/futebol/jogos" element={<JogosFutebol />} />
+          <Route path="/futebol/jogo/:idJogo" element={<JogoFutebol />} />
         </Route>
       </Routes>
     </BrowserRouter>

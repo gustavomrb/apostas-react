@@ -1,6 +1,6 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import NavBar from "./NavBar";
+import Header from "./Header";
 
 const darkTheme = createTheme({});
 
@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <CssBaseline />
       <ThemeProvider theme={darkTheme}>
+        <Header />
         <Container maxWidth="lg">
-          <NavBar />
           <Outlet />
         </Container>
       </ThemeProvider>
