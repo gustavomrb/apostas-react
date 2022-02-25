@@ -15,7 +15,7 @@ function geraJogos(jogos) {
         fontSize: "15px",
       }}
       component={RouterLink}
-      to={"/futebol/jogo/" + jogo.id}
+      to={"/tenis/jogo/" + jogo.id}
       key={i}
     >
       <Box sx={{ width: "70%" }}>
@@ -24,13 +24,13 @@ function geraJogos(jogos) {
             {jogo.horario}
           </Box>
           <Box component="span" sx={{ display: "flex", justifyContent: "center", flexBasis: "44%" }}>
-            {jogo.casa.nome}
+            {jogo.jogadorCasa.nome}
           </Box>
           <Box component="span" sx={{ flexBasis: "2%" }}>
             X
           </Box>
           <Box component="span" sx={{ display: "flex", justifyContent: "center", flexBasis: "44%" }}>
-            {jogo.fora.nome}
+            {jogo.jogadorFora.nome}
           </Box>
         </Paper>
       </Box>
@@ -38,10 +38,10 @@ function geraJogos(jogos) {
   ));
 }
 
-function JogosFutebol() {
+function JogosTenis() {
   const [jogos, setJogos] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3001/futebol/jogos")
+    fetch("http://localhost:3001/tenis/jogos")
       .then((response) => response.json())
       .then((data) => setJogos(data));
   }, []);
@@ -61,4 +61,4 @@ function JogosFutebol() {
   );
 }
 
-export default JogosFutebol;
+export default JogosTenis;

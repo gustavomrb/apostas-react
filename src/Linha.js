@@ -7,9 +7,9 @@ export default function Linha(props) {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
-        {metaDados.map((c) => (
+        {metaDados.map((c, i) => (
           <React.Fragment>
-            <BoxAccordion valor={dados[c.valor]} sx={{ flexBasis: c.basis }} tipo={c.tipo} />
+            <BoxAccordion valor={dados[c.valor]} sx={{ flexBasis: c.basis }} tipo={c.tipo} key={i} />
           </React.Fragment>
         ))}
       </Box>

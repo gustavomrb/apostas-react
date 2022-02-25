@@ -3,6 +3,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
+import { SportsTennis } from "@mui/icons-material";
 
 function NavBar() {
   return (
@@ -43,6 +44,23 @@ function NavBar() {
           >
             <SportsBasketballIcon />
             <span sx={{ padding: "15px" }}>Basquete</span>
+          </Link>
+        </Box>
+        <Box>
+          <Link
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#000000",
+              padding: "15px",
+              fontWeight: "bold",
+            }}
+            component={RouterLink}
+            to="/tenis/jogos"
+          >
+            <SportsTennis />
+            <span>Tênis</span>
           </Link>
         </Box>
       </Box>

@@ -1,32 +1,32 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Box } from "@mui/material";
-import PanelResultados from "./PanelResultados";
+import PanelResultadosTenis from "./PanelResultadosTenis";
 
-function JogoFutebol() {
+function JogoTenis() {
   const { idJogo } = useParams();
 
   const [jogo, setJogo] = React.useState({});
   useEffect(() => {
-    fetch("http://localhost:3001/futebol/jogo/" + idJogo)
+    fetch("http://localhost:3001/tenis/jogo/" + idJogo)
       .then((response) => response.json())
       .then((data) => setJogo(data));
   }, [idJogo]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-      {jogo.casa && (
+      {jogo.jogadorCasa && (
         <React.Fragment>
-          <PanelResultados time={jogo.casa} key={0} />
+          <PanelResultadosTenis jogador={jogo.jogadorCasa} key={0} />
         </React.Fragment>
       )}
-      {jogo.fora && (
+      {jogo.jogadorFora && (
         <React.Fragment>
-          <PanelResultados time={jogo.fora} key={1} />
+          <PanelResultadosTenis jogador={jogo.jogadorFora} key={1} />
         </React.Fragment>
       )}
     </Box>
   );
 }
 
-export default JogoFutebol;
+export default JogoTenis;

@@ -1,17 +1,16 @@
 import React, { useCallback, useEffect } from "react";
 import { Box, Button } from "@mui/material";
-import InputBusca from "./InputBusca";
+import InputBuscaTenis from "./InputBuscaTenis";
 
-function Filtro(state) {
-  const { resultados, setResultados, idTime } = state;
+function FiltroTenis(state) {
+  const { resultados, setResultados, linkJogador } = state;
 
   const [opcoesFiltro, setOpcoesFiltro] = React.useState({
-    campeonato: [],
-    mando: [],
-    tamanho: "",
     data: [],
     resultado: [],
+    quadra: [],
     oponente: [],
+    rankOponente: [],
     excluiOponente: [],
   });
 
@@ -26,10 +25,10 @@ function Filtro(state) {
   }, [opcoesFiltro]);
 
   const buscaResultados = useCallback(() => {
-    fetch(`http://localhost:3001/futebol/resultados/${idTime}?` + geraParams())
+    fetch(`http://localhost:3001/tenis/resultados/${linkJogador}?` + geraParams())
       .then((response) => response.json())
       .then((data) => setResultados(data));
-  }, [idTime, setResultados, geraParams]);
+  }, [linkJogador, setResultados, geraParams]);
 
   useEffect(() => {
     buscaResultados();
@@ -38,48 +37,42 @@ function Filtro(state) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-        <InputBusca
-          resultados={resultados}
-          valor="campeonato"
-          opcoesFiltro={opcoesFiltro}
-          setOpcoesFiltro={setOpcoesFiltro}
-          basis="30%"
-        />
-        <InputBusca
-          resultados={resultados}
-          valor="mando"
-          opcoesFiltro={opcoesFiltro}
-          setOpcoesFiltro={setOpcoesFiltro}
-          basis="18%"
-        />
-        <InputBusca
-          resultados={resultados}
-          valor="tamanho"
-          opcoesFiltro={opcoesFiltro}
-          setOpcoesFiltro={setOpcoesFiltro}
-        />
-        <InputBusca
+        <InputBuscaTenis
           resultados={resultados}
           valor="data"
           opcoesFiltro={opcoesFiltro}
           setOpcoesFiltro={setOpcoesFiltro}
           basis="25%"
         />
-        <InputBusca
+        <InputBuscaTenis
           resultados={resultados}
           valor="resultado"
           opcoesFiltro={opcoesFiltro}
           setOpcoesFiltro={setOpcoesFiltro}
           basis="20%"
         />
-        <InputBusca
+        <InputBuscaTenis
+          resultados={resultados}
+          valor="quadra"
+          opcoesFiltro={opcoesFiltro}
+          setOpcoesFiltro={setOpcoesFiltro}
+          basis="30%"
+        />
+        <InputBuscaTenis
           resultados={resultados}
           valor="oponente"
           opcoesFiltro={opcoesFiltro}
           setOpcoesFiltro={setOpcoesFiltro}
           basis="30%"
         />
-        <InputBusca
+        <InputBuscaTenis
+          resultados={resultados}
+          valor="rankOponente"
+          opcoesFiltro={opcoesFiltro}
+          setOpcoesFiltro={setOpcoesFiltro}
+          basis="30%"
+        />
+        <InputBuscaTenis
           resultados={resultados}
           valor="excluiOponente"
           opcoesFiltro={opcoesFiltro}
@@ -96,4 +89,4 @@ function Filtro(state) {
   );
 }
 
-export default Filtro;
+export default FiltroTenis;

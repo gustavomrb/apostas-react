@@ -5,28 +5,15 @@ function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-function InputBusca(state) {
+function InputBuscaTenis(state) {
   const { resultados, valor, opcoesFiltro, setOpcoesFiltro, basis } = state;
 
   let retorno = null;
-  if (valor === "tamanho") {
-    retorno = (
-      <Autocomplete
-        options={["", "grande", "pequeno"]}
-        renderInput={(params) => <TextField {...params} label={valor.charAt(0).toUpperCase() + valor.slice(1)} />}
-        size="small"
-        sx={{ flexBasis: basis }}
-        value={opcoesFiltro[valor] || ""}
-        onChange={(event, newValue) => {
-          setOpcoesFiltro({ ...opcoesFiltro, [valor]: newValue });
-        }}
-      />
-    );
-  } else if (valor === "data") {
+  if (valor === "data") {
     retorno = (
       <Autocomplete
         multiple
-        options={[""].concat(resultados.map((r) => r[valor].split(".")[2]).filter(onlyUnique))}
+        options={[""].concat(resultados.map((r) => r[valor].split("-")[2]).filter(onlyUnique))}
         renderInput={(params) => <TextField {...params} label="Temporada" />}
         size="small"
         sx={{ flexBasis: basis }}
@@ -40,7 +27,7 @@ function InputBusca(state) {
     retorno = (
       <Autocomplete
         multiple
-        options={["", "W", "D", "L"]}
+        options={["", "W", "L"]}
         renderInput={(params) => <TextField {...params} label="Resultado" />}
         size="small"
         sx={{ flexBasis: basis }}
@@ -84,4 +71,4 @@ function InputBusca(state) {
   return retorno;
 }
 
-export default InputBusca;
+export default InputBuscaTenis;
