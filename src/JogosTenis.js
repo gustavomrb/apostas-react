@@ -24,13 +24,13 @@ function geraJogos(jogos) {
             {jogo.horario}
           </Box>
           <Box component="span" sx={{ display: "flex", justifyContent: "center", flexBasis: "44%" }}>
-            {jogo.jogadorCasa.nome}
+            {jogo.playerHome.name}
           </Box>
           <Box component="span" sx={{ flexBasis: "2%" }}>
             X
           </Box>
           <Box component="span" sx={{ display: "flex", justifyContent: "center", flexBasis: "44%" }}>
-            {jogo.jogadorFora.nome}
+            {jogo.playerAway.name}
           </Box>
         </Paper>
       </Box>

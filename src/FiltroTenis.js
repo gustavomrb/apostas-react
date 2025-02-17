@@ -3,7 +3,7 @@ import { Box, Button } from "@mui/material";
 import InputBuscaTenis from "./InputBuscaTenis";
 
 function FiltroTenis(state) {
-  const { resultados, setResultados, linkJogador } = state;
+  const { resultados, setResultados, nomeJogador } = state;
 
   const [opcoesFiltro, setOpcoesFiltro] = React.useState({
     data: [],
@@ -25,10 +25,10 @@ function FiltroTenis(state) {
   }, [opcoesFiltro]);
 
   const buscaResultados = useCallback(() => {
-    fetch(`http://localhost:3001/tenis/resultados/${linkJogador}?` + geraParams())
+    fetch(`http://localhost:3001/tenis/resultados/${nomeJogador}?` + geraParams())
       .then((response) => response.json())
       .then((data) => setResultados(data));
-  }, [linkJogador, setResultados, geraParams]);
+  }, [nomeJogador, setResultados, geraParams]);
 
   useEffect(() => {
     buscaResultados();

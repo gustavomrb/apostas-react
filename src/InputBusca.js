@@ -9,20 +9,7 @@ function InputBusca(state) {
   const { resultados, valor, opcoesFiltro, setOpcoesFiltro, basis } = state;
 
   let retorno = null;
-  if (valor === "tamanho") {
-    retorno = (
-      <Autocomplete
-        options={["", "grande", "pequeno"]}
-        renderInput={(params) => <TextField {...params} label={valor.charAt(0).toUpperCase() + valor.slice(1)} />}
-        size="small"
-        sx={{ flexBasis: basis }}
-        value={opcoesFiltro[valor] || ""}
-        onChange={(event, newValue) => {
-          setOpcoesFiltro({ ...opcoesFiltro, [valor]: newValue });
-        }}
-      />
-    );
-  } else if (valor === "data") {
+  if (valor === "data") {
     retorno = (
       <Autocomplete
         multiple

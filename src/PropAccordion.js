@@ -9,13 +9,18 @@ const metaDadosPlayerProps = [
   { nomeColuna: "Time", valor: "time", basis: "5%" },
   { nomeColuna: "Limite", valor: "limite", basis: "5%" },
   { nomeColuna: "Média", valor: "media", basis: "5%" },
-  { nomeColuna: "Over Odds", valor: "oddsOver", basis: "10%", tipo: "odd" },
-  { nomeColuna: "Under Odds", valor: "oddsUnder", basis: "10%", tipo: "odd" },
-  { nomeColuna: "Temporada", valor: "temporada", basis: "8%", tipo: "stat" },
-  { nomeColuna: "Diferença Over", valor: "diferencaOver", basis: "12%" },
-  { nomeColuna: "Diferença Under", valor: "diferencaUnder", basis: "12%" },
+  { nomeColuna: "Over Odds", valor: "oddsOver", basis: "5%", tipo: "odd" },
+  { nomeColuna: "Under Odds", valor: "oddsUnder", basis: "5%", tipo: "odd" },
+  { nomeColuna: "Temp. Atual", valor: "temporada", basis: "6%", tipo: "stat" },
+  { nomeColuna: "Ultima", valor: "temporadaUltima", basis: "6%", tipo: "stat" },
+  //{ nomeColuna: "Dif. Over", valor: "diferencaOver", basis: "10%" },
+  //{ nomeColuna: "Dif. Under", valor: "diferencaUnder", basis: "10%" },
   { nomeColuna: "Últimos 5", valor: "ultimos5", basis: "8%", tipo: "stat" },
   { nomeColuna: "Últimos 10", valor: "ultimos10", basis: "8%", tipo: "stat" },
+  //{ nomeColuna: "DvPos", valor: "defenseVsPosition", basis: "10%" },
+  { nomeColuna: "Final", valor: "taxaFinal", basis: "10%" },
+  { nomeColuna: "Dif. Over", valor: "diferencaOverFinal", basis: "10%" },
+  { nomeColuna: "Dif. Under", valor: "diferencaUnderFinal", basis: "10%" },
 ];
 
 const metaDadosBoxScore = [
@@ -104,7 +109,9 @@ export default function PropAccordion(props) {
   const geraDados = () => {
     return props.prop.jogadores.map((j) => {
       const playerStats = jogo.playerStats.find((stats) => stats.jogador === j.jogador);
-
+      if (!playerStats) {
+        return null;
+      }
       return {
         dados: j,
         filhos: [

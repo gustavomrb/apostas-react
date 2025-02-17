@@ -13,13 +13,13 @@ function InputBuscaTenis(state) {
     retorno = (
       <Autocomplete
         multiple
-        options={[""].concat(resultados.map((r) => r[valor].split("-")[2]).filter(onlyUnique))}
+        options={[""].concat(resultados.map((r) => r.data.split("‑")[2]).filter(onlyUnique))}
         renderInput={(params) => <TextField {...params} label="Temporada" />}
         size="small"
         sx={{ flexBasis: basis }}
-        value={opcoesFiltro[valor] || ""}
+        value={opcoesFiltro.data || ""}
         onChange={(event, newValue) => {
-          setOpcoesFiltro({ ...opcoesFiltro, [valor]: newValue });
+          setOpcoesFiltro({ ...opcoesFiltro, data: newValue });
         }}
       />
     );

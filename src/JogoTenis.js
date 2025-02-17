@@ -15,14 +15,14 @@ function JogoTenis() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-      {jogo.jogadorCasa && (
+      {jogo.playerHome && (
         <React.Fragment>
-          <PanelResultadosTenis jogador={jogo.jogadorCasa} key={0} />
+          <PanelResultadosTenis jogador={jogo.playerHome} key={0} />
         </React.Fragment>
       )}
-      {jogo.jogadorFora && (
+      {jogo.playerAway && (
         <React.Fragment>
-          <PanelResultadosTenis jogador={jogo.jogadorFora} key={1} />
+          <PanelResultadosTenis jogador={jogo.playerAway} key={1} />
         </React.Fragment>
       )}
     </Box>

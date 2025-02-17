@@ -13,16 +13,45 @@ export default function Tabela(props) {
   }, [dados]);
 
   const alteraOrdem = (nomeColuna) => {
+    if (["Final"].includes(nomeColuna)) {
+      const valor = metaDados.metaDados.find((d) => d.nomeColuna === nomeColuna).valor;
+      let arr = dados.slice().filter((n) => n);
+      arr.forEach((v) => {
+        v.dados[valor] = parseFloat(v.dados[valor].replace("%", ""));
+      });
+      arr.sort((a, b) => (a.dados[valor] > b.dados[valor] ? -1 : a.dados[valor] < b.dados[valor] ? 1 : 0));
+      arr.forEach((v) => {
+        v.dados[valor] = v.dados[valor].toString() + "%";
+      });
+      setArrJogadores(arr);
+      return;
+    }
+
+    let fixed = 0;
+    if (["Over Odds", "Under Odds", "Dif. Over", "Dif. Under"].includes(nomeColuna)) {
+      fixed = 2;
+    } else if (["Limite", "Média"].includes(nomeColuna)) {
+      fixed = 1;
+    }
     const valor = metaDados.metaDados.find((d) => d.nomeColuna === nomeColuna).valor;
-    const arr = dados.slice();
+    let arr = dados.slice().filter((n) => n);
+    if (fixed !== 0) {
+      arr.forEach((v) => {
+        v.dados[valor] = parseFloat(v.dados[valor]);
+      });
+    }
     arr.sort((a, b) => (a.dados[valor] > b.dados[valor] ? -1 : a.dados[valor] < b.dados[valor] ? 1 : 0));
+    if (fixed !== 0) {
+      arr.forEach((v) => (v.dados[valor] = v.dados[valor].toFixed(fixed)));
+    }
+
     setArrJogadores(arr);
   };
 
   const montaTabela = () => {
     return arrJogadores.map((d, i) => (
       <React.Fragment>
-        {d.filhos ? (
+        {d && d.filhos ? (
           <React.Fragment>
             <LinhaAccordion key={i} metaDados={metaDados} dados={d}></LinhaAccordion>
             <Divider />

@@ -20,6 +20,9 @@ const metaDados = {
 const metaDadosTotalizador = [
   { nomeColuna: "W/L", valor: "wl" },
   { nomeColuna: "O/U 2.5", valor: "ou25" },
+  { nomeColuna: "Hard", valor: "Hard" },
+  { nomeColuna: "Clay", valor: "Clay" },
+  { nomeColuna: "Grass", valor: "Grass" },
 ];
 
 const metaDadosTotalizadorRanks = [
@@ -31,7 +34,13 @@ const metaDadosTotalizadorRanks = [
   { nomeColuna: "151-200", valor: "151.200" },
   { nomeColuna: "201-300", valor: "201.300" },
   { nomeColuna: "301-400", valor: "301.400" },
-  { nomeColuna: ">400", valor: "400.401" },
+  { nomeColuna: "400-500", valor: "400.500" },
+  { nomeColuna: "500-600", valor: "500.600" },
+  { nomeColuna: "600-700", valor: "600.700" },
+  { nomeColuna: "700-800", valor: "700.800" },
+  { nomeColuna: "800-900", valor: "800.900" },
+  { nomeColuna: "900-1000", valor: "900.1000" },
+  { nomeColuna: "1000-", valor: "1000.2000" },
 ];
 
 function PanelResultadosTenis(state) {
@@ -47,10 +56,16 @@ function PanelResultadosTenis(state) {
     } else if (stat === "ou25") {
       return `${
         resultados.filter((r) => {
-          const placarSplit = r.placar.split(",");
+          const placarSplit = r.placar.split(" ");
           return placarSplit.length === 3;
         }).length
       }/${resultados.length}`;
+    } else {
+      return `${
+        resultados.filter((r) => {
+          return r.quadra === stat && r.resultado === "W";
+        }).length
+      }-${resultados.filter((r) => r.quadra === stat && r.resultado === "L").length}`;
     }
   };
 
@@ -92,10 +107,10 @@ function PanelResultadosTenis(state) {
   return (
     <Box sx={{ width: "48%" }}>
       <Paper sx={{ padding: "15px" }}>
-        <FiltroTenis resultados={resultados} setResultados={setResultados} linkJogador={jogador.link} />
+        <FiltroTenis resultados={resultados} setResultados={setResultados} nomeJogador={jogador.name} />
       </Paper>
       <Box component="span">
-        Resultados {jogador.nome} - Rank: {jogador.ranking}
+        Resultados {jogador.name} - Rank: {jogador.ranking} - Idade: {jogador.age} - Odds: {jogador.odds}
       </Box>
       <Paper sx={{ display: "flex", flexDirection: "column" }}>
         <Box sx={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -114,7 +129,7 @@ function PanelResultadosTenis(state) {
         </Box>
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>{escolheTotalizador()}</Box>
       </Paper>
-      <Tabela metaDados={metaDados} dados={resultados} />
+      <Tabela metaDados={metaDados} dados={resultados.slice(0, 50)} />
     </Box>
   );
 }

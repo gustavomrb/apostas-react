@@ -54,12 +54,6 @@ function Filtro(state) {
         />
         <InputBusca
           resultados={resultados}
-          valor="tamanho"
-          opcoesFiltro={opcoesFiltro}
-          setOpcoesFiltro={setOpcoesFiltro}
-        />
-        <InputBusca
-          resultados={resultados}
           valor="data"
           opcoesFiltro={opcoesFiltro}
           setOpcoesFiltro={setOpcoesFiltro}
